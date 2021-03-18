@@ -30,14 +30,15 @@ namespace Encryption
             }
            public string Caesar(int key) 
             {
+                //úprava textu
                 string sentence_lower = encrypted_sentence.ToLower();
                 string sentence = RemoveDiacritics(sentence_lower);
                 
                 string encrypted_message = "";
                 for (int i = 0; i < sentence.Length; ++i)
                 {   
-                    char letter = sentence[i];
-                    if (!char.IsLetter(letter)) encrypted_message += letter;
+                    char letter = sentence[i]; 
+                    if (!char.IsLetter(letter)) encrypted_message += letter; //nepřekládání čárek, mezer...
                     else 
                     {
                         letter = (char)(letter + key);
@@ -56,7 +57,7 @@ namespace Encryption
                 }
                 return encrypted_message;
             }
-            private string RemoveDiacritics(string s) 
+            private string RemoveDiacritics(string s) //metoda, která zbaví text diakritiky
             {                
                 byte[] tempBytes;
                 tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(s);
